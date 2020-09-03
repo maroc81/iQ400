@@ -10,33 +10,28 @@ typealias Row = MutableMap<String, String>
 
 class MainPanelView : View("Dynamic Table View") {
     private val controller: MainPanelController by inject()
-    var table : TableView<Row>
-    var textArea :TextArea
-    init {
-        table= TableView<Row>()
-        textArea = TextArea()
-        textArea.text = "SE W6QE"
-        textArea.text = "select * from CDCART00"
-        textArea.apply {
-
-        }
-        shortcut("Meta+Enter") {
-            runAsync { controller.loadQueryToTableView(textArea.text) }
-        }
-    }
+    var table: TableView<Row> by singleAssign()
+    val query = stringProperty("select * from CDCART00")
 
     override val root = borderpane {
-
         top = label("File")
 
-        center = splitpane{
-            orientation = Orientation.VERTICAL
-            add(textArea)
-            add(table)
+        center = splitpane(Orientation.VERTICAL) {
+            textarea {
+                textProperty().bind(query)
+            }
+            table = tableview {
+            }
         }
 
         bottom = hbox {
             label(controller.statusToView)
+        }
+    }
+
+    init {
+        shortcut("Meta+Enter") {
+            runAsync { controller.loadQueryToTableView(query.value) }
         }
     }
 }

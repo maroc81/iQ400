@@ -5,11 +5,10 @@ import tornadofx.launch
 
 import view.MainPanelView
 
-class BigMommy : App(MainPanelView::class, Style::class)
-{
-     init {
-          importStylesheet(resources.get("bootstrap3.css"))
-     }
+class BigMommy : App(MainPanelView::class, Style::class) {
+    init {
+        importStylesheet(resources.get("bootstrap3.css"))
+    }
 }
 
 fun main(args: Array<String>) {
