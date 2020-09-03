@@ -54,3 +54,6 @@ gradle-app.setting
 # SonarLint
 .idea/sonarlint
 .idea/sonarlint
+
+# MAC Junk
+.DS_Store
